@@ -63,6 +63,10 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip";
 
+import Active from "./Active";
+import Draft from "./Draft";
+import Archived from "./Archived";
+
 const Index = () => {
   const navigate = useNavigate();
 
@@ -355,6 +359,15 @@ const Index = () => {
                   </div>
                 </CardFooter>
               </Card>
+            </TabsContent>
+            <TabsContent value="active">
+              <Active />
+            </TabsContent>
+            <TabsContent value="draft">
+              <Draft />
+            </TabsContent>
+            <TabsContent value="archived">
+              <Archived />
             </TabsContent>
             <TabsContent value="coming-soon">
               <Card x-chunk="dashboard-06-chunk-0">
