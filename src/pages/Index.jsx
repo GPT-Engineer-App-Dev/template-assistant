@@ -48,7 +48,7 @@ const Index = () => {
   ]);
 
   const onSubmit = (data) => {
-    setProducts([...products, data]);
+    setProducts([...products, { ...data, status: data.status || "Active" }]);
     reset();
   };
 
