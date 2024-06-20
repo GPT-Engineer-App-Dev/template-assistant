@@ -63,8 +63,6 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip"
 
-
-
 const Index = () => {
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -288,6 +286,7 @@ const Index = () => {
                 <TabsTrigger value="archived" className="hidden sm:flex">
                   Archived
                 </TabsTrigger>
+                <TabsTrigger value="coming-soon">Coming Soon</TabsTrigger>
               </TabsList>
               <div className="ml-auto flex items-center gap-2">
                 <DropdownMenu>
@@ -308,6 +307,9 @@ const Index = () => {
                     <DropdownMenuCheckboxItem>Draft</DropdownMenuCheckboxItem>
                     <DropdownMenuCheckboxItem>
                       Archived
+                    </DropdownMenuCheckboxItem>
+                    <DropdownMenuCheckboxItem>
+                      Coming Soon
                     </DropdownMenuCheckboxItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -340,6 +342,24 @@ const Index = () => {
                   <div className="text-xs text-muted-foreground">
                     Showing <strong>1-10</strong> of <strong>32</strong>{" "}
                     products
+                  </div>
+                </CardFooter>
+              </Card>
+            </TabsContent>
+            <TabsContent value="coming-soon">
+              <Card x-chunk="dashboard-06-chunk-0">
+                <CardHeader>
+                  <CardTitle>Coming Soon Products</CardTitle>
+                  <CardDescription>
+                    Manage your products that are coming soon.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {/* Add code to display "Coming Soon" products here */}
+                </CardContent>
+                <CardFooter>
+                  <div className="text-xs text-muted-foreground">
+                    Showing <strong>1-10</strong> of <strong>32</strong> products
                   </div>
                 </CardFooter>
               </Card>
