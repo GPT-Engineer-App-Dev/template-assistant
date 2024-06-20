@@ -51,9 +51,6 @@ const Index = () => {
     setProducts([...products, { ...data, status: data.status }]);
     reset();
   };
-    setProducts([...products, { ...data, status: data.status }]);
-    reset();
-  };
 
   return (
     <div className="p-4">
