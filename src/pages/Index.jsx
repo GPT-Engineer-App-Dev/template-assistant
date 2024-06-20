@@ -42,12 +42,15 @@ import Archived from "./Archived";
 
 const Index = () => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, setValue } = useForm();
   const [products, setProducts] = useState([
     { name: "Product 1", price: 100, status: "Active", country: "USA" },
   ]);
 
   const onSubmit = (data) => {
+    setProducts([...products, { ...data, status: data.status }]);
+    reset();
+  };
     setProducts([...products, { ...data, status: data.status }]);
     reset();
   };
@@ -120,7 +123,7 @@ const Index = () => {
                   </div>
                   <div>
                     <Label htmlFor="status">Status</Label>
-                    <Select {...register("status")}>
+                    <Select {...register("status")} onValueChange={(value) => setValue("status", value)}>
                       <SelectTrigger>
                         <SelectValue placeholder="Select a status" />
                       </SelectTrigger>
