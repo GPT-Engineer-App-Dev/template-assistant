@@ -46,6 +46,14 @@ const Index = () => {
   const updateNote = useUpdateNote();
   const deleteNote = useDeleteNote();
 
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [currentNote, setCurrentNote] = useState(null);
+
+  const handleEditNote = (note) => {
+    setCurrentNote(note);
+    setIsEditModalOpen(true);
+  };
+
   const onSubmit = (data) => {
     addNote.mutate(data);
     reset();
@@ -175,7 +183,7 @@ const Index = () => {
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
-                            <DropdownMenuItem onClick={() => updateNote.mutate({ ...note, title: "Updated Title" })}>
+                            <DropdownMenuItem onClick={() => handleEditNote(note)}>
                               <Edit className="mr-2 h-4 w-4" />
                               Edit
                             </DropdownMenuItem>
@@ -234,7 +242,7 @@ const Index = () => {
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
-                            <DropdownMenuItem onClick={() => updateNote.mutate({ ...note, title: "Updated Title" })}>
+                            <DropdownMenuItem onClick={() => handleEditNote(note)}>
                               <Edit className="mr-2 h-4 w-4" />
                               Edit
                             </DropdownMenuItem>
@@ -258,6 +266,43 @@ const Index = () => {
           </Card>
         </TabsContent>
       </Tabs>
+      <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Edit Note</DialogTitle>
+          </DialogHeader>
+          <form onSubmit={handleSubmit((data) => {
+            updateNote.mutate({ ...currentNote, ...data });
+            setIsEditModalOpen(false);
+          })} className="space-y-4">
+            <div>
+              <Label htmlFor="title">Title</Label>
+              <Input id="title" defaultValue={currentNote?.title} {...register("title")} />
+            </div>
+            <div>
+              <Label htmlFor="content">Content</Label>
+              <Input id="content" defaultValue={currentNote?.content} {...register("content")} />
+            </div>
+            <div>
+              <Label htmlFor="color">Color</Label>
+              <Input id="color" defaultValue={currentNote?.color} {...register("color")} />
+            </div>
+            <div>
+              <Label htmlFor="pinned">Pinned</Label>
+              <Select defaultValue={currentNote?.pinned ? "true" : "false"} {...register("pinned")} onValueChange={(value) => setValue("pinned", value)}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="true">True</SelectItem>
+                  <SelectItem value="false">False</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <Button type="submit">Save Changes</Button>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
