@@ -38,10 +38,6 @@ import { useForm } from "react-hook-form";
 
 import { useNotes, useAddNote, useUpdateNote, useDeleteNote } from "@/integrations/supabase/index.js";
 
-import Active from "./Active";
-import Draft from "./Draft";
-import Archived from "./Archived";
-
 const Index = () => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const { register, handleSubmit, reset, setValue } = useForm();
@@ -63,18 +59,16 @@ const Index = () => {
     return <div>Error loading notes</div>;
   }
 
+  const pinnedNotes = notes.filter(note => note.pinned);
+  const notPinnedNotes = notes.filter(note => !note.pinned);
+
   return (
     <div className="p-4">
-      <Tabs defaultValue="all">
+      <Tabs defaultValue="pinned">
         <div className="flex items-center">
           <TabsList>
-            <TabsTrigger value="all">All</TabsTrigger>
-            <TabsTrigger value="active">Active</TabsTrigger>
-            <TabsTrigger value="draft">Draft</TabsTrigger>
-            <TabsTrigger value="archived" className="hidden sm:flex">
-              Archived
-            </TabsTrigger>
-            <TabsTrigger value="coming-soon">Coming Soon</TabsTrigger>
+            <TabsTrigger value="pinned">Pinned</TabsTrigger>
+            <TabsTrigger value="not-pinned">Not Pinned</TabsTrigger>
           </TabsList>
           <div className="ml-auto flex items-center gap-2">
             <DropdownMenu>
@@ -90,15 +84,9 @@ const Index = () => {
                 <DropdownMenuLabel>Filter by</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuCheckboxItem checked>
-                  Active
+                  Pinned
                 </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem>Draft</DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem>
-                  Archived
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem>
-                  Coming Soon
-                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem>Not Pinned</DropdownMenuCheckboxItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <Button size="sm" variant="outline" className="h-8 gap-1">
@@ -151,12 +139,12 @@ const Index = () => {
             </Dialog>
           </div>
         </div>
-        <TabsContent value="all">
+        <TabsContent value="pinned">
           <Card x-chunk="dashboard-06-chunk-0">
             <CardHeader>
-              <CardTitle>Notes</CardTitle>
+              <CardTitle>Pinned Notes</CardTitle>
               <CardDescription>
-                Manage your notes.
+                Manage your pinned notes.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -171,7 +159,7 @@ const Index = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {notes.map((note) => (
+                  {pinnedNotes.map((note) => (
                     <TableRow key={note.id}>
                       <TableCell>{note.title}</TableCell>
                       <TableCell>{note.content}</TableCell>
@@ -205,34 +193,66 @@ const Index = () => {
             </CardContent>
             <CardFooter>
               <div className="text-xs text-muted-foreground">
-                Showing <strong>1-10</strong> of <strong>{notes.length}</strong> notes
+                Showing <strong>1-10</strong> of <strong>{pinnedNotes.length}</strong> notes
               </div>
             </CardFooter>
           </Card>
         </TabsContent>
-        <TabsContent value="active">
-          <Active />
-        </TabsContent>
-        <TabsContent value="draft">
-          <Draft />
-        </TabsContent>
-        <TabsContent value="archived">
-          <Archived />
-        </TabsContent>
-        <TabsContent value="coming-soon">
+        <TabsContent value="not-pinned">
           <Card x-chunk="dashboard-06-chunk-0">
             <CardHeader>
-              <CardTitle>Coming Soon Notes</CardTitle>
+              <CardTitle>Not Pinned Notes</CardTitle>
               <CardDescription>
-                Manage your notes that are coming soon.
+                Manage your not pinned notes.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              {/* Add code to display "Coming Soon" notes here */}
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Title</TableHead>
+                    <TableHead>Content</TableHead>
+                    <TableHead>Color</TableHead>
+                    <TableHead>Pinned</TableHead>
+                    <TableHead>Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {notPinnedNotes.map((note) => (
+                    <TableRow key={note.id}>
+                      <TableCell>{note.title}</TableCell>
+                      <TableCell>{note.content}</TableCell>
+                      <TableCell>{note.color}</TableCell>
+                      <TableCell>
+                        <Badge variant="outline">{note.pinned ? "Yes" : "No"}</Badge>
+                      </TableCell>
+                      <TableCell>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="outline" size="icon">
+                              <MoreVertical className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuItem onClick={() => updateNote.mutate({ ...note, title: "Updated Title" })}>
+                              <Edit className="mr-2 h-4 w-4" />
+                              Edit
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => deleteNote.mutate(note.id)}>
+                              <Trash className="mr-2 h-4 w-4" />
+                              Delete
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             </CardContent>
             <CardFooter>
               <div className="text-xs text-muted-foreground">
-                Showing <strong>1-10</strong> of <strong>{notes.length}</strong> notes
+                Showing <strong>1-10</strong> of <strong>{notPinnedNotes.length}</strong> notes
               </div>
             </CardFooter>
           </Card>
