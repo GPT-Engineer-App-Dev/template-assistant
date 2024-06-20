@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   File,
   ListFilter,
@@ -39,6 +40,7 @@ import { useForm } from "react-hook-form";
 import { useNotes, useAddNote, useUpdateNote, useDeleteNote } from "@/integrations/supabase/index.js";
 
 const Index = () => {
+  const navigate = useNavigate();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const { register, handleSubmit, reset, setValue } = useForm();
   const { data: notes, isLoading, isError } = useNotes();
@@ -56,6 +58,10 @@ const Index = () => {
     setValue("color", note.color);
     setValue("pinned", note.pinned ? "true" : "false");
     setIsEditModalOpen(true);
+  };
+
+  const handleViewDetails = (id) => {
+    navigate(`/note/${id}`);
   };
 
   const onSubmit = (data) => {
@@ -196,6 +202,10 @@ const Index = () => {
                               <Trash className="mr-2 h-4 w-4" />
                               Delete
                             </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleViewDetails(note.id)}>
+                              <File className="mr-2 h-4 w-4" />
+                              View Details
+                            </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </TableCell>
@@ -255,6 +265,10 @@ const Index = () => {
                               <Trash className="mr-2 h-4 w-4" />
                               Delete
                             </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleViewDetails(note.id)}>
+                              <File className="mr-2 h-4 w-4" />
+                              View Details
+                            </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </TableCell>
@@ -313,6 +327,10 @@ const Index = () => {
                             <DropdownMenuItem onClick={() => deleteNote.mutate(note.id)}>
                               <Trash className="mr-2 h-4 w-4" />
                               Delete
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleViewDetails(note.id)}>
+                              <File className="mr-2 h-4 w-4" />
+                              View Details
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
