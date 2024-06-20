@@ -1,3 +1,4 @@
+```jsx
 import { useState } from "react";
 import {
   File,
@@ -393,49 +394,118 @@ const Index = () => {
                           </DropdownMenu>
                         </TableCell>
                       </TableRow>
-                    </TableBody>
-                  </Table>
-                </CardContent>
-                <CardFooter>
-                  <div className="text-xs text-muted-foreground">
-                    Showing <strong>1-10</strong> of <strong>32</strong>{" "}
-                    products
-                  </div>
-                </CardFooter>
-              </Card>
-            </TabsContent>
-            <TabsContent value="active">
-              <Active />
-            </TabsContent>
-            <TabsContent value="draft">
-              <Draft />
-            </TabsContent>
-            <TabsContent value="archived">
-              <Archived />
-            </TabsContent>
-            <TabsContent value="coming-soon">
-              <Card x-chunk="dashboard-06-chunk-0">
-                <CardHeader>
-                  <CardTitle>Coming Soon Products</CardTitle>
-                  <CardDescription>
-                    Manage your products that are coming soon.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {/* Add code to display "Coming Soon" products here */}
-                </CardContent>
-                <CardFooter>
-                  <div className="text-xs text-muted-foreground">
-                    Showing <strong>1-10</strong> of <strong>32</strong> products
-                  </div>
-                </CardFooter>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </main>
-      </div>
-    </div>
-  )
-};
-
-export default Index;
+                      <TableRow>
+                        <TableCell>Product 2</TableCell>
+                        <TableCell>$150</TableCell>
+                        <TableCell>
+                          <Badge variant="outline" className="bg-green-100 text-green-800">Active</Badge>
+                        </TableCell>
+                        <TableCell>Canada</TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="outline" size="icon">
+                                <MoreVertical className="h-4 w-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuItem>
+                                <Edit className="mr-2 h-4 w-4" />
+                                Edit
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <Trash className="mr-2 h-4 w-4" />
+                                Delete
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Product 3</TableCell>
+                        <TableCell>$200</TableCell>
+                        <TableCell>
+                          <Badge variant="outline" className="bg-yellow-100 text-yellow-800">Draft</Badge>
+                        </TableCell>
+                        <TableCell>UK</TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="outline" size="icon">
+                                <MoreVertical className="h-4 w-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuItem>
+                                <Edit className="mr-2 h-4 w-4" />
+                                Edit
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <Trash className="mr-2 h-4 w-4" />
+                                Delete
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Product 4</TableCell>
+                        <TableCell>$250</TableCell>
+                        <TableCell>
+                          <Badge variant="outline" className="bg-red-100 text-red-800">Archived</Badge>
+                        </TableCell>
+                        <TableCell>Germany</TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="outline" size="icon">
+                                <MoreVertical className="h-4 w-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuItem>
+                                <Edit className="mr-2 h-4 w-4" />
+                                Edit
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <Trash className="mr-2 h-4 w-4" />
+                                Delete
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Product 5</TableCell>
+                        <TableCell>$300</TableCell>
+                        <TableCell>
+                          <Badge variant="outline" className="bg-blue-100 text-blue-800">Coming Soon</Badge>
+                        </TableCell>
+                        <TableCell>France</TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="outline" size="icon">
+                                <MoreVertical className="h-4 w-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuItem>
+                                <Edit className="mr-2 h-4 w-4" />
+                                Edit
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <Trash className="mr-2 h-4 w-4" />
+                                Delete
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Product 6</TableCell>
+                        <TableCell>$350</TableCell>
+                        <TableCell>
+                          <Badge variant="outline" className="bg-green-100 text-green-800">Active</Badge>
+                        </TableCell>
+                        <Table
