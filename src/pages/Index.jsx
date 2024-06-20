@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   File,
   Home,
@@ -11,6 +12,9 @@ import {
   Settings,
   ShoppingCart,
   Users2,
+  MoreVertical,
+  Edit,
+  Trash,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -69,6 +73,7 @@ import Archived from "./Archived";
 
 const Index = () => {
   const navigate = useNavigate();
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -333,7 +338,7 @@ const Index = () => {
                     Export
                   </span>
                 </Button>
-                <Button size="sm" className="h-8 gap-1">
+                <Button size="sm" className="h-8 gap-1" onClick={() => setIsSheetOpen(true)}>
                   <PlusCircle className="h-3.5 w-3.5" />
                   <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                     Add Product
@@ -350,7 +355,46 @@ const Index = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                {/* <!-- ADD MOST OF THE CODE HERE --> */}
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Name</TableHead>
+                        <TableHead>Price</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Country</TableHead>
+                        <TableHead>Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell>Product 1</TableCell>
+                        <TableCell>$100</TableCell>
+                        <TableCell>
+                          <Badge variant="outline">Active</Badge>
+                        </TableCell>
+                        <TableCell>USA</TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="outline" size="icon">
+                                <MoreVertical className="h-4 w-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuItem>
+                                <Edit className="mr-2 h-4 w-4" />
+                                Edit
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <Trash className="mr-2 h-4 w-4" />
+                                Delete
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
                 </CardContent>
                 <CardFooter>
                   <div className="text-xs text-muted-foreground">
