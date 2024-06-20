@@ -51,6 +51,10 @@ const Index = () => {
 
   const handleEditNote = (note) => {
     setCurrentNote(note);
+    setValue("title", note.title);
+    setValue("content", note.content);
+    setValue("color", note.color);
+    setValue("pinned", note.pinned ? "true" : "false");
     setIsEditModalOpen(true);
   };
 
