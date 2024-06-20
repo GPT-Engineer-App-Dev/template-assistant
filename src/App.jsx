@@ -5,6 +5,7 @@ import SharedLayout from "./components/SharedLayout.jsx";
 import Active from "./pages/Active.jsx";
 import Draft from "./pages/Draft.jsx";
 import Archived from "./pages/Archived.jsx";
+import Login from "./pages/Login.jsx"; // Add this import
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/draft" element={<Draft />} />
           <Route path="/archived" element={<Archived />} />
         </Route>
+        <Route path="/login" element={<Login />} /> {/* Add this route */}
       </Routes>
     </Router>
   );
