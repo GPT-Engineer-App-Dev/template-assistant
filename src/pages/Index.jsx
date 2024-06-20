@@ -3,7 +3,6 @@ import {
   Home,
   LineChart,
   ListFilter,
-  MoreHorizontal,
   Package,
   Package2,
   PanelLeft,
@@ -12,17 +11,18 @@ import {
   Settings,
   ShoppingCart,
   Users2,
-} from "lucide-react"
+} from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "@/components/ui/badge";
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Button } from "@/components/ui/button"
+} from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -30,7 +30,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -39,9 +39,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   Table,
   TableBody,
@@ -49,21 +49,23 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/components/ui/tabs"
+} from "@/components/ui/tabs";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
   TooltipProvider,
-} from "@/components/ui/tooltip"
+} from "@/components/ui/tooltip";
 
 const Index = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -81,6 +83,7 @@ const Index = () => {
               <a
                 href="#"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                onClick={() => navigate("/")}
               >
                 <Home className="h-5 w-5" />
                 <span className="sr-only">Dashboard</span>
@@ -96,6 +99,7 @@ const Index = () => {
               <a
                 href="#"
                 className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                onClick={() => navigate("/active")}
               >
                 <ShoppingCart className="h-5 w-5" />
                 <span className="sr-only">Orders</span>
@@ -111,6 +115,7 @@ const Index = () => {
               <a
                 href="#"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                onClick={() => navigate("/draft")}
               >
                 <Package className="h-5 w-5" />
                 <span className="sr-only">Products</span>
@@ -126,6 +131,7 @@ const Index = () => {
               <a
                 href="#"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                onClick={() => navigate("/archived")}
               >
                 <Users2 className="h-5 w-5" />
                 <span className="sr-only">Customers</span>
@@ -188,6 +194,7 @@ const Index = () => {
                 <a
                   href="#"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  onClick={() => navigate("/")}
                 >
                   <Home className="h-5 w-5" />
                   Dashboard
@@ -195,6 +202,7 @@ const Index = () => {
                 <a
                   href="#"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  onClick={() => navigate("/active")}
                 >
                   <ShoppingCart className="h-5 w-5" />
                   Orders
@@ -202,6 +210,7 @@ const Index = () => {
                 <a
                   href="#"
                   className="flex items-center gap-4 px-2.5 text-foreground"
+                  onClick={() => navigate("/draft")}
                 >
                   <Package className="h-5 w-5" />
                   Products
@@ -209,6 +218,7 @@ const Index = () => {
                 <a
                   href="#"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  onClick={() => navigate("/archived")}
                 >
                   <Users2 className="h-5 w-5" />
                   Customers
