@@ -18,7 +18,6 @@ import { Badge } from "@/components/ui/badge"
 import {
   Breadcrumb,
   BreadcrumbItem,
-  Breadcrumb,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
