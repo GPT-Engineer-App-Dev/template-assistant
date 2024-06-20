@@ -43,9 +43,12 @@ import Archived from "./Archived";
 const Index = () => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const { register, handleSubmit, reset } = useForm();
+  const [products, setProducts] = useState([
+    { name: "Product 1", price: 100, status: "Active", country: "USA" },
+  ]);
 
   const onSubmit = (data) => {
-    console.log(data);
+    setProducts([...products, data]);
     reset();
   };
 
@@ -108,8 +111,8 @@ const Index = () => {
                 </DialogHeader>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                   <div>
-                    <Label htmlFor="productName">Product Name</Label>
-                    <Input id="productName" {...register("productName")} />
+                    <Label htmlFor="name">Product Name</Label>
+                    <Input id="name" {...register("name")} />
                   </div>
                   <div>
                     <Label htmlFor="price">Price</Label>
@@ -117,7 +120,7 @@ const Index = () => {
                   </div>
                   <div>
                     <Label htmlFor="status">Status</Label>
-                    <Select>
+                    <Select {...register("status")}>
                       <SelectTrigger>
                         <SelectValue placeholder="Select a status" />
                       </SelectTrigger>
@@ -159,39 +162,41 @@ const Index = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <TableRow>
-                    <TableCell>Product 1</TableCell>
-                    <TableCell>$100</TableCell>
-                    <TableCell>
-                      <Badge variant="outline">Active</Badge>
-                    </TableCell>
-                    <TableCell>USA</TableCell>
-                    <TableCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="outline" size="icon">
-                            <MoreVertical className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem>
-                            <Edit className="mr-2 h-4 w-4" />
-                            Edit
-                          </DropdownMenuItem>
-                          <DropdownMenuItem>
-                            <Trash className="mr-2 h-4 w-4" />
-                            Delete
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                  </TableRow>
+                  {products.map((product, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{product.name}</TableCell>
+                      <TableCell>${product.price}</TableCell>
+                      <TableCell>
+                        <Badge variant="outline">{product.status}</Badge>
+                      </TableCell>
+                      <TableCell>{product.country}</TableCell>
+                      <TableCell>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="outline" size="icon">
+                              <MoreVertical className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuItem>
+                              <Edit className="mr-2 h-4 w-4" />
+                              Edit
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                              <Trash className="mr-2 h-4 w-4" />
+                              Delete
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
             </CardContent>
             <CardFooter>
               <div className="text-xs text-muted-foreground">
-                Showing <strong>1-10</strong> of <strong>32</strong> products
+                Showing <strong>1-10</strong> of <strong>{products.length}</strong> products
               </div>
             </CardFooter>
           </Card>
@@ -218,7 +223,7 @@ const Index = () => {
             </CardContent>
             <CardFooter>
               <div className="text-xs text-muted-foreground">
-                Showing <strong>1-10</strong> of <strong>32</strong> products
+                Showing <strong>1-10</strong> of <strong>{products.length}</strong> products
               </div>
             </CardFooter>
           </Card>
