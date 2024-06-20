@@ -81,6 +81,7 @@ const Index = () => {
           <TabsList>
             <TabsTrigger value="pinned">Pinned</TabsTrigger>
             <TabsTrigger value="not-pinned">Not Pinned</TabsTrigger>
+            <TabsTrigger value="all-notes">All Notes</TabsTrigger>
           </TabsList>
           <div className="ml-auto flex items-center gap-2">
             <DropdownMenu>
@@ -265,6 +266,65 @@ const Index = () => {
             <CardFooter>
               <div className="text-xs text-muted-foreground">
                 Showing <strong>1-10</strong> of <strong>{notPinnedNotes.length}</strong> notes
+              </div>
+            </CardFooter>
+          </Card>
+        </TabsContent>
+        <TabsContent value="all-notes">
+          <Card x-chunk="dashboard-06-chunk-0">
+            <CardHeader>
+              <CardTitle>All Notes</CardTitle>
+              <CardDescription>
+                Manage all your notes.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Title</TableHead>
+                    <TableHead>Content</TableHead>
+                    <TableHead>Color</TableHead>
+                    <TableHead>Pinned</TableHead>
+                    <TableHead>Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {notes.map((note) => (
+                    <TableRow key={note.id}>
+                      <TableCell>{note.title}</TableCell>
+                      <TableCell>{note.content}</TableCell>
+                      <TableCell>{note.color}</TableCell>
+                      <TableCell>
+                        <Badge variant="outline">{note.pinned ? "Yes" : "No"}</Badge>
+                      </TableCell>
+                      <TableCell>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="outline" size="icon">
+                              <MoreVertical className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuItem onClick={() => handleEditNote(note)}>
+                              <Edit className="mr-2 h-4 w-4" />
+                              Edit
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => deleteNote.mutate(note.id)}>
+                              <Trash className="mr-2 h-4 w-4" />
+                              Delete
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+            <CardFooter>
+              <div className="text-xs text-muted-foreground">
+                Showing <strong>1-10</strong> of <strong>{notes.length}</strong> notes
               </div>
             </CardFooter>
           </Card>
