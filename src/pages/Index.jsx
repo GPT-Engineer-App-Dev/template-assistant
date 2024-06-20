@@ -48,7 +48,7 @@ const Index = () => {
   ]);
 
   const onSubmit = (data) => {
-    setProducts([...products, { ...data, status: data.status || "Active" }]);
+    setProducts([...products, { ...data, status: data.status }]);
     reset();
   };
 
@@ -125,10 +125,10 @@ const Index = () => {
                         <SelectValue placeholder="Select a status" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="active">Active</SelectItem>
-                        <SelectItem value="draft">Draft</SelectItem>
-                        <SelectItem value="archived">Archived</SelectItem>
-                        <SelectItem value="coming-soon">Coming Soon</SelectItem>
+                        <SelectItem value="Active">Active</SelectItem>
+                        <SelectItem value="Draft">Draft</SelectItem>
+                        <SelectItem value="Archived">Archived</SelectItem>
+                        <SelectItem value="Coming Soon">Coming Soon</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
