@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import {
   File,
@@ -25,6 +25,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
+  BreadcrumbLink,
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import {
@@ -69,7 +70,16 @@ import {
 
 const SharedLayout = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  const generateBreadcrumbs = () => {
+    const pathnames = location.pathname.split("/").filter((x) => x);
+    return pathnames.map((value, index) => {
+      const to = `/${pathnames.slice(0, index + 1).join("/")}`;
+      return { name: value.charAt(0).toUpperCase() + value.slice(1), to };
+    });
+  };
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -196,20 +206,16 @@ const SharedLayout = () => {
           <Breadcrumb className="hidden md:flex">
             <BreadcrumbList>
               <BreadcrumbItem>
-                <Breadcrumb asChild>
-                  <a href="#">Dashboard</a>
-                </Breadcrumb>
+                <BreadcrumbLink href="/">Home</BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <Breadcrumb asChild>
-                  <a href="#">Products</a>
-                </Breadcrumb>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>All Products</BreadcrumbPage>
-              </BreadcrumbItem>
+              {generateBreadcrumbs().map((breadcrumb, index) => (
+                <React.Fragment key={breadcrumb.to}>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href={breadcrumb.to}>{breadcrumb.name}</BreadcrumbLink>
+                  </BreadcrumbItem>
+                </React.Fragment>
+              ))}
             </BreadcrumbList>
           </Breadcrumb>
           <div className="relative ml-auto flex-1 md:grow-0">
