@@ -1,4 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Dashboard from "./pages/Dashboard.jsx";
 import Index from "./pages/Index.jsx";
 import Settings from "./pages/Settings.jsx";
 import SharedLayout from "./components/SharedLayout.jsx";
@@ -19,6 +20,7 @@ function App() {
           <Route path="/draft" element={<Draft />} />
           <Route path="/archived" element={<Archived />} />
           <Route path="/note/:id" element={<NoteDetails />} /> {/* Add this route */}
+          <Route path="/dashboard" element={<Dashboard />} />
         </Route>
         <Route path="/login" element={<Login />} />
       </Routes>
